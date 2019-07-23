@@ -8,7 +8,7 @@ import sys
 flag = int(sys.argv[1])
 inputMom = sys.argv[2]
 outputPos = sys.argv[3]
-Nfft = 603
+Nfft = 1005
 if flag == 0:
     with h5py.File(inputMom,'r') as ipt, h5py.File(outputPos,'w') as opt:
         isoE = np.array(ipt['/isoE'])
@@ -17,7 +17,8 @@ if flag == 0:
         k_fft_shift = np.fft.fftshift(k_fft)
         Dr = k_int**3 + 3 * k_int * np.abs(k_fft_shift)**2
         # opt['/QPI'] = Dr[(Nfft//2-100):(Nfft//2+101),(Nfft//2-100):(Nfft//2+101)]
-        opt.create_dataset('/QPI',data = Dr, compression = 'gzip')
+        opt.create_dataset('/QPI',data = Dr, dtype='float32', compression = 'gzip')
+
         #print(Dr.shape,isoE.shape,Dr[(Nfft//2-100):(Nfft//2+101),(Nfft//2-100):(Nfft//2+101)])
 else:
     with h5py.File(inputMom,'r') as ipt, h5py.File(outputPos,'w') as opt:
@@ -27,4 +28,5 @@ else:
         k_fft_shift = np.fft.fftshift(k_fft)
         Dr = k_int**3 - k_int * np.abs(k_fft_shift)**2
         # opt['/QPI'] = Dr[(Nfft//2-100):(Nfft//2+100),(Nfft//2-100):(Nfft//2+101)]
-        opt.create_dataset('/QPI',data = Dr, compression = 'gzip')
+        opt.create_dataset('/QPI',data = Dr, dtype='float32',compression = 'gzip')
+        # opt.create_dataset('/QPI',data = Dr, compression = 'gzip', compression_opts = 9, shuffle= True)
