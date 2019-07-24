@@ -1,3 +1,4 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 # Overview
 
 此为 *实验物理的大数据方法（2）* 课程第二阶段大作业： **ISOENERGY** 的评测平台。
@@ -14,28 +15,28 @@
 
 对于某一个动量空间的矩阵，对应图像如图
 
-！[动量空间图像](figure/pMom.png)
+![动量空间图像](figure/pMom.png)
 
-使用的转换过程仅考虑无磁性情况下，对于动量空间 $f(k)$ 为实数的情况下，可以推导出实空间公式为
+使用的转换过程仅考虑无磁性情况下，对于动量空间 \\(f(k)\\) 为实数的情况下，可以推导出实空间公式为
 
 $$
 D(\mathbf{r}) = A^3+3A*\left|B\right|^2
 $$
 
-其中$A=\int \mathrm{d}\mathbf{k} f(\mathbf{k})$，$B=\int \mathrm{d}\mathbf{k} f(\mathbf{k})e^{-i\mathbf{k}\mathbf{r}}$
+其中\\(A=\int \mathrm{d}\mathbf{k} f(\mathbf{k})\\)，\\(B=\int \mathrm{d}\mathbf{k} f(\mathbf{k})e^{-i\mathbf{k}\mathbf{r}}\\)
 在离散的矩阵中，对于 A 的计算可以采用 **FFT** 加速，对应于二维 **FFT** 变换的公式如下
 
 $$
 B(v,u)=\sum_{m=0}^{200}\sum_{n=0}^{200} f(\mathbf{m,n})e^{-j2\pi{\frac{vm+un}{N}}}
 $$
 
-可以只采用 $N=200$ 进行 **FFT** 变换，但是结果会很小，由于像素点个数只有 $201*201$，因此放大图像会失真
+可以只采用 \\(N=200\\) 进行 **FFT** 变换，但是结果会很小，由于像素点个数只有 \\(201*201\\)，因此放大图像会失真
 
-！[201点FFT](figure/201FFT.png)
+![201点FFT](figure/201FFT.png)
 
-为了得到更精细的结果，程序将 **FFT** 变换的长度变为原来矩阵大小的 5 倍，即 $N=1005$。为了将变换位置放置在图像中心，程序利用 `fftshift` 将矩阵进行了圆周位移。
+为了得到更精细的结果，程序将 **FFT** 变换的长度变为原来矩阵大小的 5 倍，即 \\(N=1005\\)。为了将变换位置放置在图像中心，程序利用 `fftshift` 将矩阵进行了圆周位移。
 
-！[1000点FFT](figure/1000FFT.png)
+![1000点FFT](figure/1000FFT.png)
 
 可以取中间部分的 $201*201$ 个点放大查看
 
@@ -53,13 +54,13 @@ $$
 
 `example.h5` 由 900 个 group 组成，每个 group 包含两个 dataset : `isoE`。你提交的文件应该要和这个样例文件一致。
 
-其中名为 `isoE` 的 dataset 的矩阵 $shape = (201, 201)$，名为 `QPI` 的 dataset 的矩阵 $shape = (1005, 1005)$
+其中名为 `isoE` 的 dataset 的矩阵 shape \\(= (201, 201)\\)，名为 `QPI` 的 dataset 的矩阵 shape \\(= (1005, 1005)\\)
 
 # Evaluation
 
-评分算法采用 **L2**距离，假定你的提交为 $f_{sub}$，标准结果为$f_{ans}$，计算公式如下
+评分算法采用 **L2**距离，假定你的提交为 \\(f_{sub}\\)，标准结果为\\(f_{ans}\\)，计算公式如下
 $$
-D_{L_2}=\sum_{i}^{j}{{(abs({f_{sub}-f_{ans}}))}^2}
+D_{L_2}=\sum_{i}\sum_{j}{{(abs({f_{sub}-f_{ans}}))}^2}
 $$
 
 因此你的提交越接近真实结果，评测试用的 **L2**距离越小。
@@ -77,5 +78,5 @@ $$
 
 # Resources
 
-若有任何疑问，还可以在 讨论区发帖交流，或者联系教学团队。
+若有任何疑问，还可以在 讨论区 发帖交流，或者联系教学团队。
 
