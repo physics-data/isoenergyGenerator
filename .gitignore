@@ -3,3 +3,6 @@ dataOut/*
 simTruth/*
 train/*
 *.7z
+testGrader.py
+.vscode/*
+__pycache__/
