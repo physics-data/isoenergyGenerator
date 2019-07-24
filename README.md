@@ -12,16 +12,34 @@
 
 用于评测的 `problem.h5` 以及 `training.h5`中的 dataset `QPI` 的数据都是通过同一份程序产生，输入的数据是不同的动量空间数据，例如 `training.h5`中的 dataset `isoE` 的数据。
 
+对于某一个动量空间的矩阵，对应图像如图
+
+！[动量空间图像](figure/pMom.png)
+
 使用的转换过程仅考虑无磁性情况下，对于动量空间 $f(k)$ 为实数的情况下，可以推导出实空间公式为
+
 $$
 D(\mathbf{r}) = A^3+3A*\left|B\right|^2
 $$
+
 其中$A=\int \mathrm{d}\mathbf{k} f(\mathbf{k})$，$B=\int \mathrm{d}\mathbf{k} f(\mathbf{k})e^{-i\mathbf{k}\mathbf{r}}$
 在离散的矩阵中，对于 A 的计算可以采用 **FFT** 加速，对应于二维 **FFT** 变换的公式如下
+
 $$
 B(v,u)=\sum_{m=0}^{200}\sum_{n=0}^{200} f(\mathbf{m,n})e^{-j2\pi{\frac{vm+un}{N}}}
 $$
+
+可以只采用 $N=200$ 进行 **FFT** 变换，但是结果会很小，由于像素点个数只有 $201*201$，因此放大图像会失真
+
+！[201点FFT](figure/201FFT.png)
+
 为了得到更精细的结果，程序将 **FFT** 变换的长度变为原来矩阵大小的 5 倍，即 $N=1005$。为了将变换位置放置在图像中心，程序利用 `fftshift` 将矩阵进行了圆周位移。
+
+！[1000点FFT](figure/1000FFT.png)
+
+可以取中间部分的 $201*201$ 个点放大查看
+
+![1000点FFT放大中间部分](figure/1000FFTpart.png)
 
 程序的位置位于[清华git](https://git.tsinghua.edu.cn/zaq15/isoenergy/blob/master/scatter.py)。
 
