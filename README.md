@@ -2,11 +2,11 @@
 
 此为 *实验物理的大数据方法（2）* 课程第二阶段大作业： **ISOENERGY** 的评测平台。
 
-关于该作业的物理背景及简介，可以参见 [第一阶段作业](https://github.com/physics-data/tpl_isoenergy) 。
+关于该作业的物理背景及简介，可以参见 [第一阶段作业](https://github.com/physics-data/tpl_isoenergy2020) 。
 
 本阶段中的任务是从给出的实空间数据，找出对应的动量空间数据。涉及到 **HDF5** 的读取和写入，以及推导转换过程所需要的公式或者方法（比如DeepLearing）。本阶段不限制使用的编程语言、第三方库或者工具软件。
 
-训练与测试用的数据可以从 [清华云盘](https://cloud.tsinghua.edu.cn/d/bcc7b8e657e94183b123/) 下载，其中`training.h5` 是训练数据，`problem.h5 ` 是评测数据(没有`isoE` 这个dataset)。评测数据是使用与训练数据相同的参数与方法生成的。具体产生细节见后续介绍。
+训练与测试用的数据可以从 [清华云盘](https://cloud.tsinghua.edu.cn/d/c2da107e78d749859345/) 下载（更新中），其中`training.h5` 是训练数据，`problem.h5 ` 是评测数据(没有`isoE` 这个dataset)。评测数据是使用与训练数据相同的参数与方法生成的。具体产生细节见后续介绍。
 
 # Data Generation Process
 
