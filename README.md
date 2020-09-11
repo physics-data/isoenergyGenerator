@@ -4,13 +4,13 @@
 
 关于该作业的物理背景及简介，可以参见 [第一阶段作业](https://github.com/physics-data/tpl_isoenergy2020) 。
 
-本阶段中的任务是从给出的实空间数据，找出对应的动量空间数据。涉及到 **HDF5** 的读取和写入，以及推导转换过程所需要的公式或者方法（比如DeepLearing）。本阶段不限制使用的编程语言、第三方库或者工具软件。
+本阶段中的任务是从给出的实空间数据，找出对应的动量空间数据。涉及到 **HDF5** 的读取和写入，以及推导转换过程所需要的公式或者方法（比如Deep Learning）。本阶段不限制使用的编程语言、第三方库或者工具软件。
 
-训练与测试用的数据可以从 [清华云盘](https://cloud.tsinghua.edu.cn/d/79b77cf7f8fe462d86bc/) 下载（更新中），其中`training.h5` 是训练数据，`problem.h5 ` 是评测数据(没有`isoE` 这个dataset)。评测数据是使用与训练数据相同的参数与方法生成的。具体产生细节见后续介绍。
+训练与测试用的数据可以从 [清华云盘](https://cloud.tsinghua.edu.cn/d/79b77cf7f8fe462d86bc/) 下载，其中`training.h5` 是训练数据，`problem.h5 ` 是评测数据（没有`isoE` 这个dataset）。评测数据是使用与训练数据相同的参数与方法生成的。具体产生细节见后续介绍。
 
 # Data Generation Process
 
-用于评测的 `problem.h5` 以及 `training.h5`中的 dataset `QPI` 的数据都是通过同一份程序产生，输入的数据是不同的动量空间数据，例如 `training.h5`中的 dataset `isoE` 的数据。
+用于评测的 `problem.h5` 以及 `training.h5 `中的 dataset `QPI` 的数据都是通过同一份程序产生，输入的数据是不同的动量空间数据，例如 `training.h5 `中的 dataset `isoE` 的数据。
 
 对于某一个动量空间的矩阵，对应图像如图
 
@@ -44,19 +44,24 @@ $$
 
 ![1000点FFT放大中间部分](figure/1000FFTpart.png)
 
-数据生成程序位于 [清华 Git](https://git.tsinghua.edu.cn/zaq15/isoenergy/blob/master/scatter.py)。
+数据生成程序位于 [GitHub](https://github.com/physics-data/isoenergyGenerator)，包括以下文件：
+
+* `generate_scatter_reigion_2fold.py`：随机生成具有 2-fold 对称性的动量空间等能面数据
+* `generate_scatter_reigion_4fold_multithread.py`：随机生成具有 4-fold 对称性的动量空间等能面数据
+* `scatter.py`：从动量空间转换为实空间
+* `merge_multithread.py`：生成数据集文件
 
 # Data Format
 
 从上述程序转换过程中可以注意到对应的数据格式如下：
 
-`training.h5` 由 18000 个 group 组成（序号为2000-19999），每个 group 包含两个 dataset : `isoE`, `QPI`。
+`training.h5` 由 18000 个 group 组成（序号为 2000-19999），每个 group 包含两个 dataset : `isoE`, `QPI`。
 
-`problem.h5` 由 2000 个 group 组成（序号为0000-1999），每个 group 包含一个 dataset :  `QPI`。
+`problem.h5` 由 2000 个 group 组成（序号为 0000-1999），每个 group 包含一个 dataset :  `QPI`。
 
-`example.h5` 由 2000 个 group 组成（序号为0000-1999），每个 group 包含一个 dataset : `isoE`。你提交的文件的格式应该要和这个样例文件一致。
+`example.h5` 由 2000 个 group 组成（序号为 0000-1999），每个 group 包含一个 dataset : `isoE`。你提交的文件的格式必须与其一致。
 
-其中 `isoE` 的矩阵形状为 $(201, 201)$，`QPI` 的矩阵形状为 $(1005, 1005)$。
+其中所有 `isoE` 的矩阵形状为 $(201, 201)$，`QPI` 的矩阵形状为 $(1005, 1005)$。
 
 # Evaluation
 
@@ -77,8 +82,4 @@ $$
 + 代码整体结构与思路
 + 遇到的问题及解决方法
 + 代码的运行方式（特别是使用了额外的软件包或者需要较复杂的配置时）
-
-# Resources
-
-若有任何疑问，还可以在 讨论区 发帖交流，或者联系教学团队。
 
