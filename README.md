@@ -6,7 +6,7 @@
 
 本阶段中的任务是从给出的实空间数据，找出对应的动量空间数据。涉及到 **HDF5** 的读取和写入，以及推导转换过程所需要的公式或者方法（比如DeepLearing）。本阶段不限制使用的编程语言、第三方库或者工具软件。
 
-训练与测试用的数据可以从 [清华云盘](https://cloud.tsinghua.edu.cn/d/c2da107e78d749859345/) 下载（更新中），其中`training.h5` 是训练数据，`problem.h5 ` 是评测数据(没有`isoE` 这个dataset)。评测数据是使用与训练数据相同的参数与方法生成的。具体产生细节见后续介绍。
+训练与测试用的数据可以从 [清华云盘](https://cloud.tsinghua.edu.cn/d/79b77cf7f8fe462d86bc/) 下载（更新中），其中`training.h5` 是训练数据，`problem.h5 ` 是评测数据(没有`isoE` 这个dataset)。评测数据是使用与训练数据相同的参数与方法生成的。具体产生细节见后续介绍。
 
 # Data Generation Process
 
@@ -50,11 +50,11 @@ $$
 
 从上述程序转换过程中可以注意到对应的数据格式如下：
 
-`training.h5` 由 9000 个 group 组成，每个 group 包含两个 dataset : `isoE`, `QPI`。
+`training.h5` 由 18000 个 group 组成（序号为2000-19999），每个 group 包含两个 dataset : `isoE`, `QPI`。
 
-`problem.h5` 由 900 个 group 组成，每个 group 包含一个 dataset :  `QPI`。
+`problem.h5` 由 2000 个 group 组成（序号为0000-1999），每个 group 包含一个 dataset :  `QPI`。
 
-`example.h5` 由 900 个 group 组成，每个 group 包含一个 dataset : `isoE`。你提交的文件应该要和这个样例文件一致。
+`example.h5` 由 2000 个 group 组成（序号为0000-1999），每个 group 包含一个 dataset : `isoE`。你提交的文件的格式应该要和这个样例文件一致。
 
 其中 `isoE` 的矩阵形状为 $(201, 201)$，`QPI` 的矩阵形状为 $(1005, 1005)$。
 
