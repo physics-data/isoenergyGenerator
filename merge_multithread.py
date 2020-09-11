@@ -34,7 +34,7 @@ with h5py.File(f'problem2.h5', 'w') as h:
         h.create_dataset(str(2 * i + 1).zfill(4)+'/QPI',data=FOUR_FOLD_PROBLEM[i],dtype='float32', compression='gzip')
 
 # answer: first 1000 + 1000 isoE data
-with h5py.File(f'anwser2.h5', 'w') as h:
+with h5py.File(f'answer2.h5', 'w') as h:
     for i in tqdm(range(1000)):
         h.create_dataset(str(2 * i).zfill(4)+'/isoE',data=TWO_FOLD_DATA[i],dtype='float32', compression='gzip')
         h.create_dataset(str(2 * i + 1).zfill(4)+'/isoE',data=FOUR_FOLD_DATA[i],dtype='float32', compression='gzip')
@@ -42,7 +42,7 @@ with h5py.File(f'anwser2.h5', 'w') as h:
 # exmple: some random 2000 isoE data
 with h5py.File(f'example2.h5', 'w') as h:
     for i in tqdm(range(2000)):
-        h.create_dataset(str(i).zfill(4)+'/isoE',data=np.zeros((1005, 1005)),dtype='float32', compression='gzip')
+        h.create_dataset(str(i).zfill(4)+'/isoE',data=np.zeros((201, 201)),dtype='float32', compression='gzip')
 
 # train: remaining 9000 + 9000 QPI + isoE data
 with h5py.File(f'train2.h5', 'w') as h:
